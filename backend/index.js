@@ -34,5 +34,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, () => {
-    console.log(`SERVER RUNNING PORT: ${process.env.PORT}`);
+    console.log(`SERVER RUNNING PORT: 3000`);
 });
