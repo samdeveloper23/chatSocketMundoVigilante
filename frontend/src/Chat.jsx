@@ -8,7 +8,8 @@ import {
     Container,
     Message,
     MessageHeader,
-    Divider
+    Divider,
+    Icon
 } from "semantic-ui-react";
 
 export const Chat = ({ socket, username, room }) => {
@@ -67,7 +68,7 @@ export const Chat = ({ socket, username, room }) => {
 
                 <CardContent extra>
                     <Form>
-                        <FormField>
+                        <FormField className="ui action input ">
                             <Input
                                 action={{
                                     color: "teal",
@@ -78,7 +79,15 @@ export const Chat = ({ socket, username, room }) => {
                                 }}
                                 type="text"
                                 placeholder="Mensaje..."
-                                onChange={(e) => setCurrentMessage(e.target.value)} />
+                                onChange={(e) => setCurrentMessage(e.target.value)}
+                                onKeyPres={(e) => {
+                                  if (e.key === "Enter")
+                                    sendMessage();
+                                }} />
+                            <button className="ui teal icon right labeld button">
+                                <Icon name="send" />
+                                Enviar
+                            </button>
                         </FormField>
                     </Form>
                 </CardContent>
