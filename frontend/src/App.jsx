@@ -20,12 +20,15 @@ function App() {
   const [showChat, setShowChat] = useState(false);
 
   const joinRoom = () => {
-    socket.emit("join_room", room);
+    if (username !== "" && room !== "") {
+        socket.emit("join_room", room);
+        setShowChat(true);
+  }
   };
-
   return (
     <Container>
-      <Card fluid>
+      {!showChat?(
+        <Card fluid>
         <CardContent header="Unirme al chat" />
         <CardContent>
           <Form>
@@ -53,8 +56,9 @@ function App() {
           <Icon name="user" />4 Friends
         </CardContent>
       </Card>
-
+       ) : (
       <Chat socket={socket} username={username} room={room} />
+      )}
     </Container>
   );
 }
