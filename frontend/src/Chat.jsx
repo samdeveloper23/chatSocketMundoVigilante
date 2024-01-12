@@ -7,7 +7,8 @@ import {
     Card,
     Container,
     Message,
-    MessageHeader
+    MessageHeader,
+    Divider
 } from "semantic-ui-react";
 
 export const Chat = ({ socket, username, room }) => {
@@ -46,15 +47,20 @@ export const Chat = ({ socket, username, room }) => {
         <Container>
             <Card fluid>
                 <CardContent header={`Chat MundoVigilante | En sala: ${room}`} />
-                <CardContent style={{ minHeight: "300px" }} />
+                <CardContent style={{ minHeight: "100px" }} />
                 {messagesList.map((item, i) => {
                     return (
                         <spam key={i}>
-                            <Message style={{ textAlign: username === item.author ? 'right' : 'left' }}> 
-                                <MessageHeader>{item.author}</MessageHeader>
-                                <p>{item.message}</p>
-                                <i>{item.time}</i>
+                            <Message style={{ textAlign: username === item.author ? 'right' : 'left',
+                         }}
+                            success={username === item.author}
+                            info={username !== item.author}
+                            > 
+                                <MessageHeader>{item.message}</MessageHeader>
+                                <p>Enviado por: <strong>{item.author}</strong> a las <i>{item.time}</i></p>
+                                
                             </Message>
+                            <Divider />
                         </spam>
                     );
                 })}
