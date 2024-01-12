@@ -21,7 +21,7 @@ function App() {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-        socket.emit("join_room", room);
+        socket.emit("join_room", room);   
         setShowChat(true);
   }
   };
@@ -40,6 +40,7 @@ function App() {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </FormField>
+            
             <FormField>
               <label>ID sala</label>
               <input
@@ -53,7 +54,7 @@ function App() {
           </Form>
         </CardContent>
         <CardContent extra>
-          <Icon name="user" />4 Friends
+          <Icon name="user" />4 Friendspsicologia oscura
         </CardContent>
       </Card>
        ) : (
@@ -66,3 +67,12 @@ function App() {
 export default App;
 
 //<h1>hi world!! very happy!!</h1>
+/**
+ * 
+ *  Pero que bien vivo viendo codear!
+ *            __..--''``---....___   _..._    __
+ *        _.-'    .-/";  `        ``<._  ``.''_ `.
+ *    _.-' _..--.'_    \                    `( ) )
+ *   (_..-'    (< _     ;_..__               ; `'
+ *             `-._,_)'      ``--...____..-'
+ */
