@@ -21,44 +21,44 @@ function App() {
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
-        socket.emit("join_room", room);   
-        setShowChat(true);
-  }
+      socket.emit("join_room", room);
+      setShowChat(true);
+    }
   };
   return (
     <Container>
-      {!showChat?(
+      {!showChat ? (
         <Card fluid>
-        <CardContent header="Unirme al chat" />
-        <CardContent>
-          <Form>
-            <FormField>
-              <label>Username: </label>
-              <input
-                type="text"
-                placeholder="Isma..."
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </FormField>
-            
-            <FormField>
-              <label>ID sala</label>
-              <input
-                type="text"
-                placeholder="ID Sala:"
-                onChange={(e) => setRoom(e.target.value)}
-              />
-            </FormField>
+          <CardContent header="Unirme al chat" />
+          <CardContent>
+            <Form>
+              <FormField>
+                <label>Username: </label>
+                <input
+                  type="text"
+                  placeholder="Isma..."
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </FormField>
 
-            <Button onClick={joinRoom}>Unirme</Button>
-          </Form>
-        </CardContent>
-        <CardContent extra>
-          <Icon name="user" />4 Friendspsicologia oscura
-        </CardContent>
-      </Card>
-       ) : (
-      <Chat socket={socket} username={username} room={room} />
+              <FormField>
+                <label>ID sala</label>
+                <input
+                  type="text"
+                  placeholder="ID Sala:"
+                  onChange={(e) => setRoom(e.target.value)}
+                />
+              </FormField>
+
+              <Button onClick={joinRoom}>Unirme</Button>
+            </Form>
+          </CardContent>
+          <CardContent extra>
+            <Icon name="user" />4 Friendspsicologia oscura
+          </CardContent>
+        </Card>
+      ) : (
+        <Chat socket={socket} username={username} room={room} />
       )}
     </Container>
   );
@@ -68,7 +68,7 @@ export default App;
 
 //<h1>hi world!! very happy!!</h1>
 /**
- * 
+ *
  *  Pero que bien vivo viendo codear!
  *            __..--''``---....___   _..._    __
  *        _.-'    .-/";  `        ``<._  ``.''_ `.
