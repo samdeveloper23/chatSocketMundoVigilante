@@ -11,6 +11,7 @@ import {
     Divider,
     Icon
 } from "semantic-ui-react";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 export const Chat = ({ socket, username, room }) => {
     const [currentMessage, setCurrentMessage] = useState("");
@@ -31,6 +32,7 @@ export const Chat = ({ socket, username, room }) => {
 
             await socket.emit("send_message", info);
             setMessagesList((list) => [...list, info]);
+            setCurrentMessage("");
         }
     };
 
@@ -38,7 +40,6 @@ export const Chat = ({ socket, username, room }) => {
         const messageHandle = (data) => {
             setMessagesList((list) => [...list, data]);
         };
-
         socket.on("receive_message", messageHandle);
 
         return () => socket.off("receive_message", messageHandle);
@@ -48,46 +49,49 @@ export const Chat = ({ socket, username, room }) => {
         <Container>
             <Card fluid>
                 <CardContent header={`Chat MundoVigilante | En sala: ${room}`} />
-                <CardContent style={{ minHeight: "100px" }} />
-                {messagesList.map((item, i) => {
-                    return (
-                        <spam key={i}>
-                            <Message style={{ textAlign: username === item.author ? 'right' : 'left',
-                         }}
-                            success={username === item.author}
-                            info={username !== item.author}
-                            > 
-                                <MessageHeader>{item.message}</MessageHeader>
-                                <p>Enviado por: <strong>{item.author}</strong> a las <i>{item.time}</i></p>
-                                
-                            </Message>
-                            <Divider />
-                        </spam>
-                    );
-                })}
+                    <ScrollToBottom>
+                    <CardContent style={{ maxHeight: "400px" }} />
+                    {messagesList.map((item, i) => {
+                        return (
+                            <spam key={i}>
+                                <Message
+                                    style={{ textAlign: username === item.author ? 'right' : 'left',
+                            }}
+                                success={username === item.author}
+                                info={username !== item.author}
+                                > 
+                                    <MessageHeader>{item.message}</MessageHeader>
+                                    <p>Enviado por: <strong>{item.author}</strong> a las <i>{item.time}</i></p>
+                                    
+                                </Message>
+                                <Divider />
+                            </spam>
+                        );
+                    })}
+                    </ScrollToBottom>
+                    
 
                 <CardContent extra>
                     <Form>
-                        <FormField className="ui action input ">
-                            <Input
-                                action={{
-                                    color: "teal",
-                                    labelPosition: "right",
-                                    icon: "send",
-                                    content: "Enviar",
-                                    onClick: sendMessage,
-                                }}
-                                type="text"
-                                placeholder="Mensaje..."
-                                onChange={(e) => setCurrentMessage(e.target.value)}
-                                onKeyPres={(e) => {
-                                  if (e.key === "Enter")
-                                    sendMessage();
-                                }} />
-                            <button className="ui teal icon right labeld button">
-                                <Icon name="send" />
-                                Enviar
-                            </button>
+                        <FormField >
+                            <div className="ui action input ">
+                                <Input
+                                    action={{
+                                        color: "teal",
+                                        labelPosition: "right",
+                                        icon: "send",
+                                        content: "Enviar",
+                                        onClick: sendMessage,
+                                    }}
+                                    value={currentMessage}
+                                    type="text"
+                                    placeholder="Mensaje..."
+                                    onChange={(e) => setCurrentMessage(e.target.value)}
+                                    onKeyPres={(e) => {
+                                        if (e.key === "Enter")
+                                        sendMessage();
+                                    }} />
+                            </div>
                         </FormField>
                     </Form>
                 </CardContent>
