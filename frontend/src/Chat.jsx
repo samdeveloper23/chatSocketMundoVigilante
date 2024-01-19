@@ -9,7 +9,6 @@ import {
     Message,
     MessageHeader,
     Divider,
-    Icon
 } from "semantic-ui-react";
 import ScrollToBottom from "react-scroll-to-bottom";
 
